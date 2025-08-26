@@ -29,6 +29,7 @@ jobs:
           echo "Repository: $GITHUB_REPOSITORY"
           echo "Branch: $GITHUB_REF_NAME"
           echo "Triggered by: $GITHUB_ACTOR"
+          echo "User: $GITHUB_ACTOR"
       
       # Step 4: Show triggering event
       - name: Display triggering event
@@ -38,4 +39,4 @@ jobs:
       
       # Step 5: Success message
       - name: Completion message
-        run: echo "✅ Workflow executed successfully!"
+        run: echo "✅ Workflow executed successfully! Triggered by $GITHUB_ACTOR"
