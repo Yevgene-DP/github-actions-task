@@ -1,0 +1,42 @@
+name: GitHub Actions Workflow for ${{ github.actor }}
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  GITHUB_ACTIONS: "true"
+
+jobs:
+  github-task-job:
+    name: GitHub Task Job
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1: Check
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2: Display GITHUB_ACTIONS environment variable
+      - name: Display environment variable
+        run: |
+          echo "GITHUB_ACTIONS = $GITHUB_ACTIONS"
+          echo "Environment variable value: ${{ env.GITHUB_ACTIONS }}"
+      
+      # 3: Open branch and repository info
+      - name: Display branch and repository
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Full repository name: ${{ github.repository }}"
+      
+      # 4: Show triggering event
+      - name: Display triggering event
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Event action: ${{ github.event.action }}"
+          echo "Triggered by user: ${{ github.actor }}"
+      
+      # 5: Compete message
+      - name: Completion message
+        run: echo "!Workflow executed successfully!"
