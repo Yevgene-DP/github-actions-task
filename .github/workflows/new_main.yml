@@ -1,4 +1,4 @@
-name: GitHub Actions Workflow for ${{ github.actor }}
+name: GitHub Actions Workflow
 
 on:
   pull_request:
@@ -13,25 +13,29 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      # Step 1: Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
       
+      # Step 2: Display GITHUB_ACTIONS environment variable
       - name: Display environment variable
         run: |
           echo "GITHUB_ACTIONS = $GITHUB_ACTIONS"
-          echo "Environment variable value: ${{ env.GITHUB_ACTIONS }}"
+          echo "Environment variable value: $GITHUB_ACTIONS"
       
+      # Step 3: Show branch and repository info
       - name: Display branch and repository
         run: |
-          echo "Repository: ${{ github.repository }}"
-          echo "Branch: ${{ github.ref_name }}"
-          echo "Full repository name: ${{ github.repository }}"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "Triggered by: $GITHUB_ACTOR"
       
+      # Step 4: Show triggering event
       - name: Display triggering event
         run: |
-          echo "Event name: ${{ github.event_name }}"
-          echo "Event action: ${{ github.event.action }}"
-          echo "Triggered by user: ${{ github.actor }}"
+          echo "Event name: $GITHUB_EVENT_NAME"
+          echo "Workflow: $GITHUB_WORKFLOW"
       
+      # Step 5: Success message
       - name: Completion message
         run: echo "✅ Workflow executed successfully!"
