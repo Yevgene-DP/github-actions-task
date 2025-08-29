@@ -9,11 +9,11 @@ env:
 
 jobs:
   github-task-job:
-    name: GitHub Task Job
+    name: GitHub Task Job for ${{ github.actor }}
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Checkout code
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
       
@@ -21,21 +21,21 @@ jobs:
       - name: Display environment variable
         run: |
           echo "GITHUB_ACTIONS = $GITHUB_ACTIONS"
-          echo "Environment variable value: $GITHUB_ACTIONS"
+          echo "Environment variable value: ${{ env.GITHUB_ACTIONS }}"
       
-      # Step 3: Show branch and repository info
+      # Step 3: Display branch and repository info
       - name: Display branch and repository
         run: |
           echo "Repository: $GITHUB_REPOSITORY"
           echo "Branch: $GITHUB_REF_NAME"
-          echo "Triggered by: $GITHUB_ACTOR"
-          echo "User: $GITHUB_ACTOR"
+          echo "Full repository name: $GITHUB_REPOSITORY"
       
-      # Step 4: Show triggering event
+      # Step 4: Display triggering event
       - name: Display triggering event
         run: |
           echo "Event name: $GITHUB_EVENT_NAME"
-          echo "Workflow: $GITHUB_WORKFLOW"
+          echo "Event action: ${{ github.event.action }}"
+          echo "Triggered by user: $GITHUB_ACTOR"
       
       # Step 5: Success message
       - name: Completion message
