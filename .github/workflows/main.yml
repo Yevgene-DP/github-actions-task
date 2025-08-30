@@ -1,5 +1,7 @@
 name: GitHub Actions Workflow
 
+run-name: "Workflow triggered by ${{ github.actor }} on ${{ github.event_name }}"
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -9,7 +11,7 @@ env:
 
 jobs:
   github-task-job:
-    name: GitHub Task Job for ${{ github.actor }}
+    name: GitHub Task Job
     runs-on: ubuntu-latest
     
     steps:
